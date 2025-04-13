@@ -45,4 +45,41 @@ public class connect {
         return results;
     }
 
+    public static boolean executeValidation (String email, String password, int role) {
+        String tableName;
+        //email = "john.doe@example.com";
+        if (role == 1) {
+            tableName = "students";
+        } else if (role == 2) {
+            tableName = "teachers";
+        } else {
+            return false;
+        }
+        String query = "SELECT password FROM " + tableName + " WHERE email = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = connection.prepareStatement(query);
+        ) {
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.next()) {
+                System.out.println("No user found with email: " + email + " in table: " + tableName);
+                return false;
+            }
+
+            if (rs.next()) {
+                //String hashedPassword = rs.getString("password");
+
+                System.out.println(BCrypt.checkpw("your_password_here", "$2b$10$By0pFzX6fRgRUPfnxl4UKOZ2HrDiY6STl1WfekDRH.biqiNAGFcw2"));
+                System.out.println("Running query on table: " + tableName);
+                System.out.println("Looking for email: " + email);
+                return true;
+                //return BCrypt.checkpw(password, hashedPassword); // Compare using BCrypt
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return false;
+    }
 }
