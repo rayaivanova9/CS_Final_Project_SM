@@ -27,6 +27,19 @@ public class login extends JFrame {
                 if (role != 0) {
                     if (connect.executeValidation(email, password, role)) {
                         message.setText("You were successfully logged in!");
+                        if (role == 1) {
+                            new studentPortal();
+                        }
+                        else if (role == 2) {
+                            new teacherPortal();
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(
+                                    null, null,
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
                     }
                     else {
                         message.setText("Wrong email or password.");

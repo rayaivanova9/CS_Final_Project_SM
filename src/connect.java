@@ -62,8 +62,6 @@ public class connect {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
 
-            System.out.println("Query being executed: " + query);
-
             if (rs.next()) {
                 String hashedPassword = rs.getString("password");
 
