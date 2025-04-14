@@ -55,6 +55,7 @@ public class connect {
         } else {
             return false;
         }
+
         String query = "SELECT password FROM " + tableName + " WHERE email = ?";
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = connection.prepareStatement(query);
@@ -62,19 +63,16 @@ public class connect {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.next()) {
-                System.out.println("No user found with email: " + email + " in table: " + tableName);
-                return false;
-            }
+            System.out.println("Query being executed: " + query);
 
             if (rs.next()) {
                 //String hashedPassword = rs.getString("password");
-
-                System.out.println(BCrypt.checkpw("your_password_here", "$2b$10$By0pFzX6fRgRUPfnxl4UKOZ2HrDiY6STl1WfekDRH.biqiNAGFcw2"));
-                System.out.println("Running query on table: " + tableName);
-                System.out.println("Looking for email: " + email);
-                return true;
+                System.out.println(password);
+                //String testPassword = "student123";
+                //String correctHash = "$2a$10$Zz96Kwq6X8Z6VWWuMc1z0.8B9Y/7hBNepzxl9ZBx9G.CXcpLMXgQe";
+                //System.out.println(BCrypt.checkpw(testPassword, correctHash));
                 //return BCrypt.checkpw(password, hashedPassword); // Compare using BCrypt
+                return password.equals(rs.getString("password"));
             }
         }
         catch (SQLException e) {
