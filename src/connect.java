@@ -31,7 +31,6 @@ public class connect {
                 //formName.model.addColumn(metaData.getColumnName(i)); // model from form1.java
             }
 
-            // to add rows.
             while (rs.next()) {
                 String[] row = new String[columnCount];
                 for (int i = 0; i < columnCount; i++) {
@@ -66,13 +65,9 @@ public class connect {
             System.out.println("Query being executed: " + query);
 
             if (rs.next()) {
-                //String hashedPassword = rs.getString("password");
-                System.out.println(password);
-                //String testPassword = "student123";
-                //String correctHash = "$2a$10$Zz96Kwq6X8Z6VWWuMc1z0.8B9Y/7hBNepzxl9ZBx9G.CXcpLMXgQe";
-                //System.out.println(BCrypt.checkpw(testPassword, correctHash));
-                //return BCrypt.checkpw(password, hashedPassword); // Compare using BCrypt
-                return password.equals(rs.getString("password"));
+                String hashedPassword = rs.getString("password");
+
+                return BCrypt.checkpw(password, hashedPassword); // Compare using BCrypt
             }
         }
         catch (SQLException e) {
