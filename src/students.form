@@ -28,7 +28,7 @@
       <component id="50833" class="javax.swing.JTable" binding="table">
         <constraints>
           <grid row="2" column="1" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
+            <preferred-size width="450" height="50"/>
           </grid>
         </constraints>
         <properties/>
@@ -38,12 +38,7 @@
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <model>
-            <item value="Course Name A-Z"/>
-            <item value="Course Name Z-A"/>
-            <item value="Grade Asc"/>
-            <item value="Grade Desc"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <vspacer id="90fc2">

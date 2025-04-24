@@ -16,19 +16,30 @@ public class connect {
     private static final String USER = "root";
     private static final String PASSWORD = "0000";
 
-    public static ArrayList<String[]> executeTable(String query, String email) {
+    public static ArrayList<String[]> executeTable(String query, String email, int role) {
         ArrayList<String[]> results = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement pstmt = connection.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
 
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
 
             // to add columns automatically
             for (int i = 1; i <= columnCount; i++) {
-                //formName.model.addColumn(metaData.getColumnName(i)); // model from [some form].java
+                if (role == 1) {
+                    students.model.addColumn(metaData.getColumnName(i));
+                }
+                else if (role == 2) {
+
+                }
+                else {
+
+                }
+
             }
 
             while (rs.next()) {

@@ -23,7 +23,15 @@ public class studentPortal extends JFrame{
         goToMyGradesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                students.model.setColumnCount(0);
                 new students(1, email);
+            }
+        });
+        goToMyTeachersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                students.model.setColumnCount(0);
+                new students(2, email);
             }
         });
     }
