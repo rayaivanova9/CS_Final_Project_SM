@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class students extends JFrame{
@@ -12,7 +14,7 @@ public class students extends JFrame{
     private JLabel tableName;
 
     public static DefaultTableModel model = new DefaultTableModel();
-    private ArrayList<String[]> studentsAll;
+    private ArrayList<String[]> columns;
 
     public students(int index, String email) {
         setSize(700, 250);
@@ -38,7 +40,7 @@ public class students extends JFrame{
         if (index == 1) {
             tableName.setText("My Grades");
 
-            studentsAll = connect.executeTable(queryGrades, email, 1);
+            columns = connect.executeTable(queryGrades, email, 1);
             updateTable();
 
             comboBox.addItem("Course Name A-Z");
@@ -49,7 +51,7 @@ public class students extends JFrame{
         else if (index == 2) {
             tableName.setText("My Teachers");
 
-            studentsAll = connect.executeTable(queryTeachers, email, 1);
+            columns = connect.executeTable(queryTeachers, email, 1);
             updateTable();
 
             comboBox.addItem("Teacher Name A-Z");
@@ -87,7 +89,7 @@ public class students extends JFrame{
                     }
                     model.setColumnCount(0);
                     model.setRowCount(0);
-                    studentsAll = connect.executeTable(queryGrades1, email, 1);
+                    columns = connect.executeTable(queryGrades1, email, 1);
                 }
                 else if (index == 2) {
                     String queryTeachers1 = queryTeachers + " ORDER BY ";
@@ -108,16 +110,36 @@ public class students extends JFrame{
                     }
                     model.setColumnCount(0);
                     model.setRowCount(0);
-                    studentsAll = connect.executeTable(queryTeachers1, email, 1);
+                    columns = connect.executeTable(queryTeachers1, email, 1);
                 }
                 updateTable();
+            }
+        });
+
+        searchBar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //super.keyTyped(e);
+                updateTableSearch(searchBar.getText());
             }
         });
     }
     private void updateTable() {
         model.setRowCount(0);
-        for (String[] column : studentsAll) {
+        for (String[] column : columns) {
             model.addRow(column);
+        }
+    }
+
+    private void updateTableSearch(String search) {
+        model.setRowCount(0); // Clear all existing rows in the table
+        for (String[] row : columns) {
+            for (String cell : row) {
+                if (cell != null && cell.toLowerCase().contains(search.toLowerCase())) {
+                    model.addRow(row);
+                    break;
+                }
+            }
         }
     }
 }
