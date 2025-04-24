@@ -28,17 +28,17 @@ public class login extends JFrame {
                     if (connect.executeValidation(email, password, role)) {
                         message.setText("You were successfully logged in!");
                         if (role == 1) {
-                            new studentPortal();
+                            new studentPortal(email);
+                            login.this.dispose();
                         }
                         else if (role == 2) {
-                            new teacherPortal();
+                            new teacherPortal(email);
+                            login.this.dispose();
                         }
                         else {
                             JOptionPane.showMessageDialog(
                                     null, null,
-                                    "Error",
-                                    JOptionPane.ERROR_MESSAGE
-                            );
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else {

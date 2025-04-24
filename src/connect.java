@@ -16,7 +16,7 @@ public class connect {
     private static final String USER = "root";
     private static final String PASSWORD = "0000";
 
-    public static ArrayList<String[]> executeTable(String query) {
+    public static ArrayList<String[]> executeTable(String query, String email) {
         ArrayList<String[]> results = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -26,9 +26,9 @@ public class connect {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            // to add colums automatically
+            // to add columns automatically
             for (int i = 1; i <= columnCount; i++) {
-                //formName.model.addColumn(metaData.getColumnName(i)); // model from form1.java
+                //formName.model.addColumn(metaData.getColumnName(i)); // model from [some form].java
             }
 
             while (rs.next()) {
@@ -72,5 +72,23 @@ public class connect {
             System.out.println("SQL Error: " + e.getMessage());
         }
         return false;
+    }
+
+    public static double executeCoursesCount(String query, String email) {
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = connection.prepareStatement(query);
+        ) {
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return 0;
     }
 }
