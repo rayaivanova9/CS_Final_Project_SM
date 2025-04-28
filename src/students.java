@@ -40,7 +40,7 @@ public class students extends JFrame{
         if (index == 1) {
             tableName.setText("My Grades");
 
-            columns = connect.executeTable(queryGrades, email, 1);
+            columns = connect.executeTable(queryGrades, email, 1, -1);
             updateTable();
 
             comboBox.addItem("Course Name A-Z");
@@ -51,7 +51,7 @@ public class students extends JFrame{
         else if (index == 2) {
             tableName.setText("My Teachers");
 
-            columns = connect.executeTable(queryTeachers, email, 1);
+            columns = connect.executeTable(queryTeachers, email, 1, -1);
             updateTable();
 
             comboBox.addItem("Teacher Name A-Z");
@@ -89,7 +89,7 @@ public class students extends JFrame{
                     }
                     model.setColumnCount(0);
                     model.setRowCount(0);
-                    columns = connect.executeTable(queryGrades1, email, 1);
+                    columns = connect.executeTable(queryGrades1, email, 1, -1);
                 }
                 else if (index == 2) {
                     String queryTeachers1 = queryTeachers + " ORDER BY ";
@@ -110,7 +110,7 @@ public class students extends JFrame{
                     }
                     model.setColumnCount(0);
                     model.setRowCount(0);
-                    columns = connect.executeTable(queryTeachers1, email, 1);
+                    columns = connect.executeTable(queryTeachers1, email, 1, -1);
                 }
                 updateTable();
             }

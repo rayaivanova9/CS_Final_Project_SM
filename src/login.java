@@ -8,7 +8,6 @@ public class login extends JFrame {
     private JPasswordField passwordField;
     private JComboBox comboBox;
     private JButton logInButton;
-    private JLabel img;
     private JLabel message;
     private JPanel loginPanel;
 
