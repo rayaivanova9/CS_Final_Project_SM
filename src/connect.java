@@ -351,6 +351,45 @@ public class connect {
             }
         }
     }
+    public static void updateTeacherImageByEmail(String email, byte[] imageData) {
+        String query = "UPDATE teachers SET photo = ? WHERE email = ?";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD); // step 1: establish connection
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setBytes(1, imageData); // Set image bytes
+            pstmt.setString(2, email);    // Set teacher's email
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Teacher's image updated successfully.");
+            } else {
+                System.out.println("Failed to update teacher's image.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ImageIcon loadTeacherImage(String email) {
+        String query = "SELECT photo FROM teachers WHERE email = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD); // step 1: establish connection
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, email);
+                ResultSet rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    byte[] imageData = rs.getBytes("photo");
+                    if (imageData != null) {
+                        ImageIcon imageIcon = new ImageIcon(imageData);
+                        return (new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+                    }
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }
