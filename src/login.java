@@ -1,5 +1,7 @@
 import javax.swing.*;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +17,7 @@ public class login extends JFrame {
         setSize(500, 500);
         setContentPane(loginPanel);
         setVisible(true);
+        loginPanel.setBackground(new Color(153, 153, 204));
 
         logInButton.addActionListener(new ActionListener() {
             @Override

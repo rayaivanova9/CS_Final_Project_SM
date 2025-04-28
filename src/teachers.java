@@ -21,6 +21,7 @@ public class teachers extends JFrame{
         setContentPane(teachersPanel);
         setVisible(true);
         table.setModel(model);
+        teachersPanel.setBackground(new Color(202, 196, 245));
 
         String query = "SELECT teacher_id AS ID, first_name AS Name, last_name AS Surname, email AS Email FROM teachers";
         columns = connect.executeQuery(query, 3);

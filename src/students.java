@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -20,6 +21,8 @@ public class students extends JFrame{
         setSize(700, 250);
         setContentPane(studentsPanel);
         setVisible(true);
+        studentsPanel.setBackground(new Color(202, 196, 245));
+
         String queryGrades = "SELECT courses.course_name AS Course, grades.grade AS Grade " +
                 "FROM grades " +
                 "JOIN students ON grades.student_id = students.student_id " +

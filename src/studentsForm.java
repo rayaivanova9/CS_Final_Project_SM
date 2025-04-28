@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ public class studentsForm extends JFrame{
         setContentPane(studentsFormPanel);
         setVisible(true);
         table.setModel(model);
+        studentsFormPanel.setBackground(new Color(202, 196, 245));
 
         String query = "SELECT student_id AS ID, first_name AS Name, last_name AS Surname, email AS Email FROM students";
         columns = connect.executeQuery(query, 4);

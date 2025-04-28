@@ -25,6 +25,8 @@ public class teacherPortal extends JFrame{
         setSize(500, 700);
         setContentPane(teacherPortalPanel);
         setVisible(true);
+        teacherPortalPanel.setBackground(new Color(190, 225, 225));
+
         String query = "SELECT COUNT(*) FROM courses WHERE email = ?";
         textArea1.setText(connect.loadText(email));
         loadImage(connect.loadTeacherImage(email));

@@ -25,6 +25,8 @@ public class courses extends JFrame{
         setVisible(true);
         table.setModel(model);
 
+        coursesPanel.setBackground(new Color(202, 196, 245));
+
         String query = "SELECT courses.course_id AS ID, courses.course_name AS Course " +
                 "FROM courses " +
                 "WHERE courses.email = ?";

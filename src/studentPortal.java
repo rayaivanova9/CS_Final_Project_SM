@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.DocumentListener;
@@ -16,6 +17,8 @@ public class studentPortal extends JFrame{
         setSize(500, 250);
         setContentPane(studentPortalPanel);
         setVisible(true);
+        studentPortalPanel.setBackground(new Color(190, 225, 225));
+
         String query = "SELECT COUNT(*) FROM grades WHERE email = ?";
         String gpaQuery = "SELECT gpa FROM students WHERE email = ?";
         textArea1.setText(connect.loadText(email));

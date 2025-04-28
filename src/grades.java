@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class grades extends JFrame{
         setContentPane(gradesPanel);
         setVisible(true);
         table.setModel(model);
+        gradesPanel.setBackground(new Color(202, 196, 245));
 
         String query = "SELECT students.student_id, CONCAT(students.first_name, ' ', students.last_name) AS Student, courses.course_name AS Course, grades.grade AS Grade " +
         "FROM grades " +
